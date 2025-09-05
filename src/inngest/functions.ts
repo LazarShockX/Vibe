@@ -8,7 +8,7 @@ export const helloWorld = inngest.createFunction(
   async ({ event }) => {
     const codeAgent = createAgent({
       name: "code-agent",
-      system: "You are an expert next.js developer. You write readable, maintainable code. You write simple Next.js and React snippets.",
+      system: "You are an expert Next.js developer. You write readable, maintainable code. You write simple Next.js and React snippets.",
       model: openai({ model: "gpt-4o" }),
     });
 
