@@ -12,8 +12,8 @@ export const helloWorld = inngest.createFunction(
   { event: "test/hello.world" },
   async ({ event, step }) => {
     const sandboxId = await step.run("get-sandbox-id", async () => {
-        const sandbox = await Sandbox.create("vibe-nextjs-lazarshockx");
-        return sandbox.sandboxId;
+      const sandbox = await Sandbox.create("vibe-nextjs-lazarshockx");
+      return sandbox.sandboxId;
     });
 
     const codeAgent = createAgent({
@@ -28,44 +28,44 @@ export const helloWorld = inngest.createFunction(
       }),
       tools: [
         createTool({
-            name: "terminal",
-            description: "Use the terminal to run commands",
-            parameters: z.object({
-                command: z.string(),
-            }) as any, // Fix before deployment
-            handler: async ({ command }, { step }) => {
-                return await step?.run("terminal", async () => {
-                  const buffers = { stdout: "", stderr: "" };
+          name: "terminal",
+          description: "Use the terminal to run commands",
+          parameters: z.object({
+              command: z.string(),
+          }) as any, // Fix before deployment
+          handler: async ({ command }, { step }) => {
+            return await step?.run("terminal", async () => {
+              const buffers = { stdout: "", stderr: "" };
 
-                  try {
-                    const sandbox = await getSandbox(sandboxId);
-                    const result = await sandbox.commands.run(command, {
-                      onStdout: (data: string) => {
-                        buffers.stdout += data;
-                      },
-                      onStderr: (data: string) => {
-                        buffers.stderr += data;
-                      },
-                    });
-                    
-                    return result.stdout;
-                  } catch (e) {
-                    console.error(`Command failed: ${e} \nstdout: ${buffers.stdout}\nstderr: ${buffers.stderr}`);
-                    return `Command failed: ${e} \nstdout: ${buffers.stdout}\nstderr: ${buffers.stderr}`;
-                  }
+              try {
+                const sandbox = await getSandbox(sandboxId);
+                const result = await sandbox.commands.run(command, {
+                  onStdout: (data: string) => {
+                    buffers.stdout += data;
+                  },
+                  onStderr: (data: string) => {
+                    buffers.stderr += data;
+                  },
                 });
-            }
+                
+                return result.stdout;
+              } catch (e) {
+                console.error(`Command failed: ${e} \nstdout: ${buffers.stdout}\nstderr: ${buffers.stderr}`);
+                return `Command failed: ${e} \nstdout: ${buffers.stdout}\nstderr: ${buffers.stderr}`;
+              }
+            });
+          }
         }),
         createTool({
           name: "createOrUpdateFiles",
           description: "Create or update files in the sandbox",
           parameters: z.object({
-            files: z.array((
+            files: z.array(
               z.object({
                 path: z.string(),
                 content: z.string(),
               })
-            ))
+            )
           }) as any, // Fix before deployment
           handler: async ({ files }, { step, network }) => {
             const newFiles = await step?.run("createOrUpdateFiles", async () => {
@@ -145,9 +145,9 @@ export const helloWorld = inngest.createFunction(
     const result = await network.run(event.data.value);
 
     const sandboxUrl = await step.run("get-sandbox-url", async () => {
-        const sandbox = await getSandbox(sandboxId);
-        const host = sandbox.getHost(3000);
-        return `https://${host}`;
+      const sandbox = await getSandbox(sandboxId);
+      const host = sandbox.getHost(3000);
+      return `https://${host}`;
     });
 
     return {
