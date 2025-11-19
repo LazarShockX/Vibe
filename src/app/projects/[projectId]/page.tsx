@@ -1,5 +1,5 @@
 interface Props {
-    params: Promise< { projectId: string } >
+    params: Promise<{ projectId: string }>
 }
 
 const Page = async ({ params }: Props) => {
