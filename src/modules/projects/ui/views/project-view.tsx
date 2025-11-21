@@ -1,7 +1,6 @@
 "use client";
 
 import { Suspense } from "react";
-import { useTRPC } from "@/trpc/client";
 
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
 

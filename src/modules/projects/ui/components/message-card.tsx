@@ -74,7 +74,7 @@ const AssistantMessage = ({ content, fragment, createdAt, isActiveFragment, onFr
                 <span className="text-sm font-medium">
                     Vibe
                 </span>
-                <span className="text-sm font-muted-foreground opacity-0 transition-opacity group-hover:opacity-100">
+                <span className="text-sm text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100">
                     {format(createdAt, "HH:mm 'on' MMM dd, yyyy")}
                 </span>
             </div>
