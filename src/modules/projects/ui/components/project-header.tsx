@@ -73,7 +73,7 @@ export const ProjectHeader = ({ projectId }: Props) => {
                                 </DropdownMenuRadioGroup>
                             </DropdownMenuSubContent>
                         </DropdownMenuPortal>
-                    </DropdownMenuSub> 
+                    </DropdownMenuSub>
                 </DropdownMenuContent>
             </DropdownMenu>
         </header>

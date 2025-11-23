@@ -20,14 +20,14 @@ export const ProjectView = ({ projectId }: Props) => {
         <div className="h-screen">
             <ResizablePanelGroup direction="horizontal">
                 <ResizablePanel defaultSize={35} minSize={10} className="flex flex-col min-h-0">
-                    <Suspense fallback={<p>Loading project...</p>}>           
+                    <Suspense fallback={<p>Loading project...</p>}>       
                         <ProjectHeader projectId={projectId} />
                     </Suspense>
                     <Suspense fallback={<p>Loading messages...</p>}>
                         <MessagesContainer
                             projectId={projectId}
                             activeFragment={activeFragment}
-                            setActiveFragment={setActiveFragment} 
+                            setActiveFragment={setActiveFragment}
                         />
                     </Suspense>
                 </ResizablePanel>
