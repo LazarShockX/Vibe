@@ -18,10 +18,14 @@ export const FragmentWeb = ({ data }: Props) => {
         setFragmentKey((prev) => prev + 1);
     }
 
-    const handleCopy = () => {
-        navigator.clipboard.writeText(data.sandboxUrl);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
+    const handleCopy = async () => {
+        try {
+            await navigator.clipboard.writeText(data.sandboxUrl);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        } catch (error) {
+            throw new Error("Failed to copy to clipboard");
+        }
     }
 
     return (
@@ -31,6 +35,7 @@ export const FragmentWeb = ({ data }: Props) => {
                     <Button
                         size="sm"
                         variant="outline"
+                        aria-label="Refresh"
                         onClick={onRefresh}
                     >
                         <RefreshCcwIcon />
@@ -40,6 +45,7 @@ export const FragmentWeb = ({ data }: Props) => {
                     <Button
                         size="sm"
                         variant="outline"
+                        aria-label="Click to copy"
                         onClick={handleCopy}
                         disabled={!data.sandboxUrl || copied}
                         className="flex-1 justify-start text-start font-normal"
@@ -53,6 +59,7 @@ export const FragmentWeb = ({ data }: Props) => {
                     <Button
                         size="sm"
                         variant="outline"
+                        aria-label="Open in new tab"
                         disabled={!data.sandboxUrl}
                         onClick={() => {
                             if (!data.sandboxUrl) return;
