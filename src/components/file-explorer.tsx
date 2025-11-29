@@ -157,7 +157,7 @@ export const FileExplorer = ({ files }: FileExplorerProps) => {
                     </div>
                 ) : (
                     <div className="h-full flex items-center justify-center text-muted-foreground">
-                        Select a file to view it&apos;s content
+                        Select a file to view its content
                     </div>
                 )}
             </ResizablePanel>
