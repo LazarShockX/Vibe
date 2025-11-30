@@ -1,9 +1,16 @@
-import Image from "next/image"
+import Image from "next/image";
+import { Suspense } from "react";
+
+import { getQueryClient, trpc } from "@/trpc/server";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
 import { ProjectForm } from "@/modules/home/ui/components/project-form";
 import { ProjectsList } from "@/modules/home/ui/components/projects-list";
 
-const Page = () => {
+const Page = async () => {
+  const queryClient = getQueryClient();
+  await queryClient.prefetchQuery(trpc.projects.getMany.queryOptions());
+    
   return (
     <div className="flex flex-col max-w-5xl mx-auto w-full">
       <section className="space-y-6 py-[16vh] 2xl:py-48">
@@ -20,7 +27,11 @@ const Page = () => {
           <ProjectForm />
         </div>
       </section>
-      <ProjectsList />
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <Suspense fallback={<p>Loading projects...</p>}>
+          <ProjectsList />
+        </Suspense>
+      </HydrationBoundary>
     </div>
   );
 }
