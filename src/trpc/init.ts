@@ -30,7 +30,7 @@ const isAuthed = t.middleware(({ ctx, next }) => {
       auth: ctx.auth,
     },
   });
-})
+});
 // Base router and procedure helpers
 export const createTRPCRouter = t.router;
 export const createCallerFactory = t.createCallerFactory;

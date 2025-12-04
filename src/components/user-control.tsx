@@ -9,7 +9,7 @@ interface Props {
     showName?: boolean;
 }
 
-export const UserControl = ({ showName}: Props) => {
+export const UserControl = ({ showName }: Props) => {
     const currentTheme = useCurrentTheme();
     
     return (
@@ -19,7 +19,7 @@ export const UserControl = ({ showName}: Props) => {
                 elements: {
                     userButtonBox: "rounded-md!",
                     userButtonAvatarBox: "rounded-md! size-8!",
-                    serButtonTrigger: "rounded-md!"
+                    userButtonTrigger: "rounded-md!"
                 },
                 baseTheme: currentTheme === "dark" ? dark : undefined,
             }}
