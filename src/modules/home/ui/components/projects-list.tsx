@@ -9,14 +9,18 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { Button } from "@/components/ui/button";
 
-export const ProjectsList = () => {
+interface Props {
+    userName: string;
+}
+
+export const ProjectsList = ({ userName }: Props) => {
     const trpc = useTRPC();
     const { data: projects } = useSuspenseQuery(trpc.projects.getMany.queryOptions());
 
     return (
         <div className="flex flex-col w-full bg-white dark:bg-sidebar rounded-xl p-8 border gap-y-6 sm:gap-y-4">
             <h2 className="text-2xl font-semibold">
-                Saved Vibes
+                {userName}&apos;s Projects
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 {projects?.length === 0 && (

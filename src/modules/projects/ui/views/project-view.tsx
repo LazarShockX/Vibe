@@ -12,6 +12,7 @@ import { FileExplorer } from "@/components/file-explorer";
 import { FragmentWeb } from "../components/fragment-web";
 import { MessagesContainer } from "../components/messages-container";
 import { ProjectHeader } from "../components/project-header";
+import { UserControl } from "@/components/user-control";
 
 import { Fragment } from "@/generated/prisma";
 
@@ -67,6 +68,7 @@ export const ProjectView = ({ projectId }: Props) => {
                                         <CrownIcon /> Upgrade
                                     </Link>
                                 </Button>
+                                <UserControl />
                             </div>
                         </div>
                         <TabsContent value="preview">
