@@ -6,10 +6,16 @@ import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
 import { ProjectForm } from "@/modules/home/ui/components/project-form";
 import { ProjectsList } from "@/modules/home/ui/components/projects-list";
+import { SignedIn } from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs/server";
 
 const Page = async () => {
+  const user = await currentUser();
   const queryClient = getQueryClient();
-  await queryClient.prefetchQuery(trpc.projects.getMany.queryOptions());
+
+  if (user) {
+    await queryClient.prefetchQuery(trpc.projects.getMany.queryOptions());
+  }
     
   return (
     <div className="flex flex-col max-w-5xl mx-auto w-full">
@@ -27,11 +33,13 @@ const Page = async () => {
           <ProjectForm />
         </div>
       </section>
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <Suspense fallback={<p>Loading projects...</p>}>
-          <ProjectsList />
-        </Suspense>
-      </HydrationBoundary>
+      <SignedIn>
+        <HydrationBoundary state={dehydrate(queryClient)}>
+          <Suspense fallback={<p>Loading projects...</p>}>
+            <ProjectsList userName={user?.firstName ?? ""} />
+          </Suspense>
+        </HydrationBoundary>
+      </SignedIn>
     </div>
   );
 }

@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { ArrowUpIcon, Loader2Icon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import TextareaAutosize from "react-textarea-autosize";
+import { useClerk } from "@clerk/nextjs";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -27,6 +28,7 @@ const formSchema = z.object({
 });
 
 export const ProjectForm = () => {
+    const clerk = useClerk();
     const router = useRouter();
     const trpc = useTRPC();
     const queryClient = useQueryClient();
@@ -45,6 +47,10 @@ export const ProjectForm = () => {
         },
         onError: (error) => {
             toast.error(error.message);
+            
+            if (error.data?.code === "UNAUTHORIZED") {
+                clerk.openSignIn();
+            }
         }
     }));
 
