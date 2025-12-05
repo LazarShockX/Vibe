@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Suspense, useState } from "react";
 import { CodeIcon, CrownIcon, EyeIcon } from "lucide-react";
+import { useAuth } from "@clerk/nextjs";
 
 import { Button } from "@/components/ui/button";
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
@@ -21,6 +22,9 @@ interface Props {
 }
 
 export const ProjectView = ({ projectId }: Props) => {
+    const { has } = useAuth();
+    const hasPremiumPlan = has?.({ plan: "pro" });
+    
     const [activeFragment, setActiveFragment] = useState<Fragment | null>(null);
     const [tabState, setTabState] = useState<"preview" | "code">("preview");
 
@@ -63,11 +67,13 @@ export const ProjectView = ({ projectId }: Props) => {
                                 </TabsTrigger>
                             </TabsList>
                             <div className="ml-auto flex items-center gap-x-2">
-                                <Button asChild variant="tertiary" size="sm">
-                                    <Link href="/pricing">
-                                        <CrownIcon /> Upgrade
-                                    </Link>
-                                </Button>
+                                {!hasPremiumPlan && (
+                                    <Button asChild variant="tertiary" size="sm">
+                                        <Link href="/pricing">
+                                            <CrownIcon /> Upgrade
+                                        </Link>
+                                    </Button>
+                                )}
                                 <UserControl />
                             </div>
                         </div>

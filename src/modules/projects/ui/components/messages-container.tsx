@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import { useTRPC } from "@/trpc/client";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
@@ -61,7 +61,9 @@ export const MessagesContainer = ({ projectId, activeFragment, setActiveFragment
             </div>
             <div className="relative p-3 pt-1">
                 <div className="absolute -top-6 left-0 right-0 h-6 bg-gradient-to-b from-transparent to-background pointer-events-none" />
-                <MessageForm projectId={projectId} />
+                <Suspense fallback={<p>Loading credits...</p>}>
+                    <MessageForm projectId={projectId} />
+                </Suspense>
             </div>
         </div>
     );
