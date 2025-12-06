@@ -134,7 +134,7 @@ export const codeAgentFunction = inngest.createFunction(
           description: "Read files from the sandbox",
           parameters: z.object({
             files: z.array(z.string()),
-          }) as any, // Fix before deployment
+          }),
           handler: async ({ files }, { step }) => {
             return await step?.run("readFiles", async () => {
               try {

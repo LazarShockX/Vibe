@@ -115,7 +115,7 @@ export const FileExplorer = ({ files }: FileExplorerProps) => {
                 setCopied(true);
                 setTimeout(() => setCopied(false), 2000);
             }
-        } catch (error) {
+        } catch {
             throw new Error("Failed to copy to clipboard");
         }
     }

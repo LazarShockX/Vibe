@@ -23,7 +23,7 @@ export const FragmentWeb = ({ data }: Props) => {
             await navigator.clipboard.writeText(data.sandboxUrl);
             setCopied(true);
             setTimeout(() => setCopied(false), 2000);
-        } catch (error) {
+        } catch {
             throw new Error("Failed to copy to clipboard");
         }
     }
