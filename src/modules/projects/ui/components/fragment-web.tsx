@@ -48,7 +48,7 @@ export const FragmentWeb = ({ data }: Props) => {
                         aria-label="Click to copy"
                         onClick={handleCopy}
                         disabled={!data.sandboxUrl || copied}
-                        className="flex-1 justify-start text-start font-normal"
+                        className="flex-1 min-w-0 justify-start text-start font-normal"
                     >
                         <span className="truncate">
                             {data.sandboxUrl}
