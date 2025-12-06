@@ -28,6 +28,7 @@ export const codeAgentFunction = inngest.createFunction(
       const messages = await prisma.message.findMany({
         where: {
           projectId: event.data.projectId,
+          type: { not: "ERROR" },
         },
         orderBy: {
           createdAt: "asc",
@@ -228,13 +229,13 @@ export const codeAgentFunction = inngest.createFunction(
       return await prisma.message.create({
         data: {
           projectId: event.data.projectId,
-          content: parseAgentOutput(responseOutput),
+          content: parseAgentOutput(responseOutput, "response"),
           role: "ASSISTANT",
           type: "RESULT",
           fragment: {
             create: {
               sandboxUrl: sandboxUrl,
-              title: parseAgentOutput(fragmentTitleOutput), 
+              title: parseAgentOutput(fragmentTitleOutput, "fragmentTitle"),
               files: result.state.data.files,
             }
           },

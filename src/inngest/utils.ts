@@ -18,15 +18,25 @@ export function lastAssistantTextMessageContent(result: AgentResult) {
         : undefined;
 }
 
-export const parseAgentOutput = (value: Message[]) => {
-  const output = value[0];
-  if (output.type !== "text") {
-    return "Here you go";
-  }
+export const parseAgentOutput = (value: Message[], type: "response" | "fragmentTitle") => {
+    const fallback =
+        type === "fragmentTitle"
+            ? "Fragment"
+            : "Here you go";
 
-  if (Array.isArray(output.content)) {
-    return output.content.map((txt) => txt).join("");
-  } else {
-    return output.content;
-  }
+    if (!value || value.length === 0) {
+        return fallback;
+    }
+
+    const output = value[0];
+
+    if (output.type !== "text") {
+        return fallback;
+    }
+
+    if (Array.isArray(output.content)) {
+        return output.content.map((c) => typeof c === "string" ? c : c.text).join("");
+    } else {
+        return output.content;
+    }
 }
