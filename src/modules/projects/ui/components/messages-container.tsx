@@ -1,4 +1,5 @@
 import { Suspense, useEffect, useRef } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import { useTRPC } from "@/trpc/client";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
@@ -19,7 +20,7 @@ export const MessagesContainer = ({ projectId, activeFragment, setActiveFragment
     const bottomRef = useRef<HTMLDivElement>(null);
     const lastAssistantMessageIdRef = useRef<string | null>(null);
 
-    const { data: messages } = useSuspenseQuery(trpc.messages.getMany.queryOptions({ projectId }, { refetchInterval: 5000 }));
+    const { data: messages } = useSuspenseQuery(trpc.messages.getMany.queryOptions({ projectId }, { refetchInterval: 2000 }));
 
     useEffect(() => {
         const lastAssistantMessage = messages.findLast((message) => message.role === "ASSISTANT");
@@ -61,9 +62,11 @@ export const MessagesContainer = ({ projectId, activeFragment, setActiveFragment
             </div>
             <div className="relative p-3 pt-1">
                 <div className="absolute -top-6 left-0 right-0 h-6 bg-gradient-to-b from-transparent to-background pointer-events-none" />
-                <Suspense fallback={<p>Loading credits...</p>}>
-                    <MessageForm projectId={projectId} />
-                </Suspense>
+                <ErrorBoundary fallback={<p>Failed loading message form</p>}>
+                    <Suspense fallback={<p>Loading credits...</p>}>
+                        <MessageForm projectId={projectId} />
+                    </Suspense>
+                </ErrorBoundary>
             </div>
         </div>
     );

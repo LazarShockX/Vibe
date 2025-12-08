@@ -13,6 +13,7 @@ export const UserControl = ({ showName }: Props) => {
     const currentTheme = useCurrentTheme();
     
     return (
+        // Wrap UserButton inside <ClerkLoaded> to prevent hydration issues
         <UserButton
             showName={showName}
             appearance={{
