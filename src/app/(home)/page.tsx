@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 
 import { getQueryClient, trpc } from "@/trpc/server";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
@@ -35,9 +36,11 @@ const Page = async () => {
       </section>
       <SignedIn>
         <HydrationBoundary state={dehydrate(queryClient)}>
-          <Suspense fallback={<p>Loading projects...</p>}>
-            <ProjectsList userName={user?.firstName ?? ""} />
-          </Suspense>
+          <ErrorBoundary fallback={<p>Error loading projects</p>}>
+            <Suspense fallback={<p>Loading projects...</p>}>
+              <ProjectsList userName={user?.firstName ?? ""} />
+            </Suspense>
+          </ErrorBoundary>
         </HydrationBoundary>
       </SignedIn>
     </div>
