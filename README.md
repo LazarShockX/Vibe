@@ -6,9 +6,6 @@ An AI-powered app that supports the development of web applications by interpret
   <img width="751" height="585" alt="Screenshot 2025-12-21 at 21 22 29" src="https://github.com/user-attachments/assets/d64e38cd-152e-4b5b-8b48-a50f6cbcd235" />
 </p>
 
-<br/>
-<br/>
-
 ## ✨ Features
 
 ## 🛠️ Tech Stack
