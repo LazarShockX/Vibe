@@ -10,6 +10,22 @@ An AI-powered app that supports the development of web applications by interpret
 
 ## ✨ Features
 
+### 🤖 AI-Powered App Building
+- Build web apps by describing an idea in natural language
+- Live project preview with URL access
+- Project and conversation history alongside generated code files
+- Credit system with usage tracking
+
+### 🔐 Authentication & Security
+- Secure authentication with Clerk
+- User session management
+- Protected routes and API endpoints
+
+### 💎 Premium Features
+- **Free Tier**: 3 monthly credits
+- **Pro**: 100 monthly credits
+- Subscription management via Clerk
+
 ## 🛠️ Tech Stack
 
 ### Frontend
