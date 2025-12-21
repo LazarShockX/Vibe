@@ -39,15 +39,14 @@ An AI-powered app that supports the development of web applications by interpret
 - **tRPC** - End-to-end typesafe APIs
 - **Prisma ORM** - Type-safe database access
 - **PostgreSQL** - Primary database (via Neon)
-- **Clerk** - Authentication system
 
 ### AI
 - **OpenAI** - Code generation
 - **Inngest** - Background job processing and agent networks
 
 ### Additional Tools
-- **Clerk** - Authentication system and subscription billing
-- **E2B** - Secure Cloud Sandbox for executing AI generated code
+- **[Clerk](https://clerk.com/)** - Authentication system and subscription billing
+- **[E2B](https://e2b.dev/)** - Secure Cloud Sandbox for executing AI generated code
 - **Docker** - Custom sandbox templates
 - **TanStack Query** - Data fetching and caching
 
