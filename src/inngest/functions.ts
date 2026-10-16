@@ -64,7 +64,7 @@ export const codeAgentFunction = inngest.createFunction(
       description: "An expert coding agent",
       system: PROMPT,
       model: openai({
-        model: "gpt-4.1",
+        model: "gpt-5.4",
         defaultParameters: {
           temperature: 0.1,
         }
@@ -193,7 +193,7 @@ export const codeAgentFunction = inngest.createFunction(
       description: "A fragment title generator",
       system: FRAGMENT_TITLE_PROMPT,
       model: openai({
-        model: "gpt-4o",
+        model: "gpt-5.4-mini",
       }),
     });
 
@@ -202,7 +202,7 @@ export const codeAgentFunction = inngest.createFunction(
       description: "A response generator",
       system: RESPONSE_PROMPT,
       model: openai({
-        model: "gpt-4o",
+        model: "gpt-5.4-mini",
       }),
     });
 
